@@ -1,4 +1,4 @@
-
+//20012912 Perry CamCorder
 
 public class Camcorder extends Item{
 	private int opticalZoom;
