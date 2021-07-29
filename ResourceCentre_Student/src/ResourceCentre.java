@@ -1,8 +1,14 @@
 import java.util.ArrayList;
 
-public class ResourceCentre {
+public class ResourceCentre 
+{
+	
+	
+	private static final int OPTION_QUIT = 5;
 
-	public static void main(String[] args) {
+
+	public static void main(String[] args) 
+	{
 
 		ArrayList<Camcorder> camcorderList = new ArrayList<Camcorder>();
 		ArrayList<Chromebook> chromebookList = new ArrayList<Chromebook>();
@@ -14,7 +20,7 @@ public class ResourceCentre {
 
 		int option = 0;
 
-		while (option != 5) {
+		while (option != OPTION_QUIT) {
 
 			ResourceCentre.menu();
 			option = Helper.readInt("Enter an option > ");
@@ -27,9 +33,7 @@ public class ResourceCentre {
 			} else if (option == 2) {
 				// Add a new item
 				ResourceCentre.setHeader("ADD");
-				ResourceCentre.setHeader("ITEM TYPES");
-				System.out.println("1. Camcorder");
-				System.out.println("2. Chromebook");
+				itemTypeMenu();
 
 				int itemType = Helper.readInt("Enter option to select item type > ");
 
@@ -50,9 +54,7 @@ public class ResourceCentre {
 			} else if (option == 3) {
 				// Loan item
 				ResourceCentre.setHeader("LOAN");
-				ResourceCentre.setHeader("ITEM TYPES");
-				System.out.println("1. Camcorder");
-				System.out.println("2. Chromebook");
+				itemTypeMenu();
 
 				int itemType = Helper.readInt("Enter option to select item type > ");
 
@@ -69,9 +71,7 @@ public class ResourceCentre {
 			} else if (option == 4) {
 				// Return item
 				ResourceCentre.setHeader("RETURN");
-				ResourceCentre.setHeader("ITEM TYPES");
-				System.out.println("1. Camcorder");
-				System.out.println("2. Chromebook");
+				itemTypeMenu();
 
 				int itemType = Helper.readInt("Enter option to select item type > ");
 				if (itemType == 1) {
@@ -84,7 +84,7 @@ public class ResourceCentre {
 					System.out.println("Invalid type");
 				}
 
-			} else if (option == 5) {
+			} else if (option == OPTION_QUIT) {
 				System.out.println("Bye!");
 			} else {
 				System.out.println("Invalid option");
@@ -92,6 +92,15 @@ public class ResourceCentre {
 
 		}
 
+	}
+
+	/**
+	 * 
+	 */
+	public static void itemTypeMenu() {
+		ResourceCentre.setHeader("ITEM TYPES");
+		System.out.println("1. Camcorder");
+		System.out.println("2. Chromebook");
 	}
 
 	public static void menu() {
@@ -298,7 +307,9 @@ public class ResourceCentre {
 
 		for (int i = 0; i < camcorderList.size(); i++) 
 		{
-			if (tag.equalsIgnoreCase(camcorderList.get(i).getAssetTag())
+			String assetTag = camcorderList.get(i).getAssetTag();
+			
+			if (tag.equalsIgnoreCase(assetTag)
 					&& camcorderList.get(i).getIsAvailable() == false) 
 			{
 				camcorderList.get(i).setIsAvailable(true);
@@ -321,6 +332,7 @@ public class ResourceCentre {
 		{
 			System.out.println("Invalid asset tag");
 		} 
+		
 		else 
 		{
 			System.out.println("Camcorder " + tag + " returned");
@@ -334,7 +346,9 @@ public class ResourceCentre {
 		// write your code here
 		for (int i = 0; i < chromebookList.size(); i++) 
 		{
-			if (tag.equalsIgnoreCase(chromebookList.get(i).getAssetTag())
+			String assetTag = chromebookList.get(i).getAssetTag();
+			
+			if (tag.equalsIgnoreCase(assetTag)
 					&& chromebookList.get(i).getIsAvailable() == false) 
 			{
 				chromebookList.get(i).setIsAvailable(true);
@@ -348,7 +362,7 @@ public class ResourceCentre {
 	public static void returnChromebook(ArrayList<Chromebook> chromebookList) 
 	{
 		// write your code here
-
+		
 		ResourceCentre.viewAllChromebook(chromebookList);
 		String tag = Helper.readString("Enter asset tag > ");
 		Boolean isReturned = doReturnChromebook(chromebookList, tag);
