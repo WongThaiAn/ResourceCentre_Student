@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class ResourceCentre 
 {
 	
-	
+	//Perry 20012912 Resource Centre
 	private static final int OPTION_QUIT = 5;
 
 
